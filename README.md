@@ -1,5 +1,10 @@
 # MindBreath AI
 
+![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)
+![Flask](https://img.shields.io/badge/Flask-3.1.3-green.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Streamlit](https://img.shields.io/badge/Streamlit-Latest-red.svg)
+
 Sistema inteligente de monitoreo de estado mental mediante análisis biométrico en tiempo real.
 
 ## 🚀 Características Principales
@@ -304,95 +309,65 @@ Para problemas, revisa:
 - STREAMLIT_GUIDE.md - Guía detallada del dashboard
 - DEPLOY.md - Guía de deployment
 
+## 🧪 Testing
+
+### Ejecutar Tests
+
+```bash
+# Test de API
+python test_api.py
+
+# Test de Dashboard
+python test_dashboard.py
+
+# Test de Endpoint Biométrico
+python test_endpoint_biometric.py
+```
+
+### Generar Datos de Prueba
+
+```bash
+# Ejecutar simulador de sensores
+cd services
+python sensor_sender.py
+```
+
+## 🤝 Contribución
+
+Las contribuciones son bienvenidas. Por favor:
+
+1. Fork el repositorio
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
 ## 📄 Licencia
 
-MIT - Libre para uso personal y comercial
+Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
+
+## 👥 Autores
+
+- **[Tu Nombre]** - *Trabajo Inicial* - [Tu GitHub]
+
+## 🙏 Agradecimientos
+
+- Flask y SQLAlchemy por las excelentes herramientas de desarrollo
+- Streamlit por el framework de dashboard
+- Scikit-learn por las herramientas de Machine Learning
+- Render por el hosting gratuito
+
+---
+
+<div align="center">
+
+**⭐ Si te gusta este proyecto, dale una estrella! ⭐**
+
+Made with ❤️ by MindBreath AI Team
+
+</div>
 
 ---
 
 **Última actualización**: Mayo 2026  
 **Versión**: 1.0.0
-python -m venv venv
-
-# Activar entorno virtual (Windows)
-venv\Scripts\activate
-
-# Activar entorno virtual (Mac/Linux)
-source venv/bin/activate
-
-# Instalar dependencias
-pip install -r requirements.txt
-
-# Ejecutar aplicación
-python app.py
-```
-
-La aplicación estará disponible en `http://localhost:5000`
-
-## Deploy en Render
-
-### Prerrequisitos
-
-- Cuenta en [Render](https://render.com)
-- Repositorio en GitHub con este código
-
-### Pasos
-
-1. **Crear base de datos PostgreSQL en Render**
-   - Ve a Render → New → PostgreSQL
-   - Configura la base de datos
-   - Copia la `Internal Database URL` (se usará automáticamente como `DATABASE_URL`)
-
-2. **Crear Web Service**
-   - Ve a Render → New → Web Service
-   - Conecta tu repositorio de GitHub
-   - Configura:
-     - **Root Directory**: `.` (raíz del proyecto)
-     - **Build Command**: `pip install -r requirements.txt`
-     - **Start Command**: `gunicorn app:app`
-     - **Environment Variables**:
-       - `FLASK_ENV`: `production`
-       - `SECRET_KEY`: (genera una clave segura)
-
-3. **Conectar Web Service con PostgreSQL**
-   - En la configuración del Web Service, ve a "Environment"
-   - Render detectará automáticamente la base de datos PostgreSQL creada
-   - La variable `DATABASE_URL` se configurará automáticamente
-
-4. **Deploy**
-   - Haz commit y push de tus cambios a GitHub
-   - Render detectará los cambios y hará deploy automáticamente
-
-## Endpoints
-
-- `GET /` - Endpoint principal con estado de la API
-- `GET /health` - Health check
-- `GET /api/v1` - Documentación de endpoints de la API
-
-## Agregar Nuevas Rutas
-
-Para agregar nuevas rutas, edita `routes/api.py`:
-
-```python
-@api_bp.route('/api/v1/nueva-ruta', methods=['GET'])
-def nueva_ruta():
-    return jsonify({'message': 'Nueva ruta'})
-```
-
-## Agregar Modelos de Base de Datos
-
-Crea nuevos archivos en `models/` para tus modelos SQLAlchemy:
-
-```python
-# models/user.py
-from models.database import db
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False)
-    
-    def to_dict(self):
-        return {'id': self.id, 'name': self.name}
-```
-
-Luego importa y usa el modelo en tus rutas.

@@ -26,6 +26,7 @@ class MindBreathAIService:
         # Recomendaciones por estado
         self.recommendations = {
             'relaxed': {
+                'emoji': '😌',
                 'status': 'Relajado',
                 'description': 'Tu estado mental es relajado y tranquilo',
                 'advice': [
@@ -37,6 +38,7 @@ class MindBreathAIService:
                 'tips': 'Este es un estado ideal. Continúa con tu rutina normal y disfruta del bienestar.'
             },
             'stressed': {
+                'emoji': '😰',
                 'status': 'Estresado',
                 'description': 'Detectamos que tu estado mental muestra signos de estrés',
                 'advice': [
@@ -49,6 +51,7 @@ class MindBreathAIService:
                 'tips': 'El estrés es temporal. Practica técnicas de relajación y cuida tu bienestar.'
             },
             'meditation': {
+                'emoji': '🧘',
                 'status': 'Meditación',
                 'description': 'Te encuentras en un estado profundo de meditación',
                 'advice': [

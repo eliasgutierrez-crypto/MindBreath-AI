@@ -3,7 +3,9 @@
 import time
 import requests
 import sys
-from simulator import BiometricSimulator
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from services.simulator import BiometricSimulator
 
 # URL de la API - Cambiar por tu URL de Render
 API_URL = "http://localhost:5000/api/biometric-data"  # Local
