@@ -1,7 +1,7 @@
 import os
 import threading
 import time
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, redirect
 from config import get_config
 from models.database import init_db, db
 
@@ -62,11 +62,15 @@ def create_app(config_name=None):
 
     @app.route('/')
     def index():
-        return render_template('index.html')
+        # Redirigir a Streamlit Cloud
+        streamlit_url = os.environ.get('STREAMLIT_URL', 'https://mindbreath-ai-dashboard.onrender.com')
+        return redirect(streamlit_url)
 
     @app.route('/dashboard')
     def dashboard():
-        return render_template('dashboard.html')
+        # Redirigir a Streamlit Cloud
+        streamlit_url = os.environ.get('STREAMLIT_URL', 'https://mindbreath-ai-dashboard.onrender.com')
+        return redirect(streamlit_url)
 
     @app.route('/api/status')
     def status():
