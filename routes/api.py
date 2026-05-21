@@ -6,24 +6,19 @@ from models.biometric_data import BiometricData
 api_bp = Blueprint('api', __name__)
 
 
-@api_bp.route('/api/v1', methods=['GET'])
+@api_bp.route('/v1', methods=['GET'])
 def api_root():
 
     return jsonify({
         'message': 'MindBreath AI API v1',
         'endpoints': [
             {
-                'path': '/',
+                'path': '/biometric-data',
                 'method': 'GET',
-                'description': 'API root'
+                'description': 'Get all biometric data'
             },
             {
-                'path': '/health',
-                'method': 'GET',
-                'description': 'Health check'
-            },
-            {
-                'path': '/api/biometric-data',
+                'path': '/biometric-data',
                 'method': 'POST',
                 'description': 'Save biometric data'
             }
@@ -31,7 +26,7 @@ def api_root():
     })
 
 
-@api_bp.route('/api/biometric-data', methods=['POST'])
+@api_bp.route('/biometric-data', methods=['POST'])
 def save_biometric_data():
 
     data = request.get_json()
@@ -88,6 +83,24 @@ def save_biometric_data():
     except Exception as e:
 
         db.session.rollback()
+
+        return jsonify({
+            'error': str(e)
+        }), 500
+
+
+@api_bp.route('/biometric-data', methods=['GET'])
+def get_biometric_data():
+
+    try:
+        records = BiometricData.query.order_by(BiometricData.timestamp.desc()).all()
+        
+        return jsonify({
+            'message': 'Biometric data retrieved successfully',
+            'data': [record.to_dict() for record in records]
+        }), 200
+
+    except Exception as e:
 
         return jsonify({
             'error': str(e)

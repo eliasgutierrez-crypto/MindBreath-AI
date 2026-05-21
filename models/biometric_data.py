@@ -1,9 +1,7 @@
 # biometric_data.py
 
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
-db = SQLAlchemy()
+from models.database import db
 
 
 class BiometricData(db.Model):

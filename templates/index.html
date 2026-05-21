@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindBreath AI - Monitoreo Biométrico</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>🧠 MindBreath AI</h1>
+                <p>Sistema de Monitoreo Biométrico Inteligente</p>
+            </div>
+            <nav>
+                <a href="/" class="nav-link active">Registrar Datos</a>
+                <a href="/dashboard" class="nav-link">Dashboard</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="form-section">
+                <div class="card">
+                    <h2>Registrar Datos Biométricos</h2>
+                    <form id="biometricForm">
+                        <div class="form-group">
+                            <label for="state">Estado Mental:</label>
+                            <select id="state" name="state" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="relaxed">Relajado</option>
+                                <option value="stressed">Estresado</option>
+                                <option value="meditation">Meditación</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="breathing_rate">Frecuencia Respiratoria (breaths/min):</label>
+                                <input type="number" id="breathing_rate" name="breathing_rate" min="0" max="100" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="heart_rate">Frecuencia Cardíaca (bpm):</label>
+                                <input type="number" id="heart_rate" name="heart_rate" min="40" max="200" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="movement">Movimiento (0-100):</label>
+                                <input type="number" id="movement" name="movement" min="0" max="100" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="stress_level">Nivel de Estrés:</label>
+                                <select id="stress_level" name="stress_level" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option value="low">Bajo</option>
+                                    <option value="medium">Medio</option>
+                                    <option value="high">Alto</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Enviar Datos</button>
+                    </form>
+
+                    <div id="message" class="message"></div>
+                </div>
+            </section>
+
+            <section class="stats-section">
+                <div class="card stats-card">
+                    <h3>Estadísticas Rápidas</h3>
+                    <div class="stats-grid">
+                        <div class="stat">
+                            <span class="stat-value" id="totalRecords">0</span>
+                            <span class="stat-label">Registros Totales</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="relaxedCount">0</span>
+                            <span class="stat-label">Relajado</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="stressedCount">0</span>
+                            <span class="stat-label">Estresado</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="meditationCount">0</span>
+                            <span class="stat-label">Meditación</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 MindBreath AI. Sistema de Monitoreo Biométrico Inteligente</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
