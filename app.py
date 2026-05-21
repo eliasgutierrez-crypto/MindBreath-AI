@@ -62,15 +62,25 @@ def create_app(config_name=None):
 
     @app.route('/')
     def index():
-        # Redirigir a Streamlit Cloud
-        streamlit_url = os.environ.get('STREAMLIT_URL', 'https://mindbreath-ai-dashboard.onrender.com')
-        return redirect(streamlit_url)
+        return jsonify({
+            'message': 'MindBreath AI API',
+            'status': 'running',
+            'dashboard': 'Usa Streamlit Cloud para el dashboard',
+            'endpoints': {
+                'api_status': '/api/status',
+                'biometric_data': '/api/biometric-data',
+                'predict': '/api/predict',
+                'model_info': '/api/model-info'
+            }
+        })
 
     @app.route('/dashboard')
     def dashboard():
-        # Redirigir a Streamlit Cloud
-        streamlit_url = os.environ.get('STREAMLIT_URL', 'https://mindbreath-ai-dashboard.onrender.com')
-        return redirect(streamlit_url)
+        return jsonify({
+            'message': 'El dashboard HTML antiguo ha sido eliminado',
+            'status': 'use_streamlit',
+            'info': 'Por favor usa Streamlit Cloud para el dashboard interactivo'
+        })
 
     @app.route('/api/status')
     def status():
