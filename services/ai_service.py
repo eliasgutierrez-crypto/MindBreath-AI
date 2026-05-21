@@ -70,6 +70,7 @@ class MindBreathAIService:
         Carga el modelo entrenado desde pickle
         """
         if not Path(self.model_path).exists():
+            print(f"[ERROR] Modelo no encontrado en: {self.model_path}")
             raise FileNotFoundError(f"Modelo no encontrado en: {self.model_path}")
         
         try:
@@ -77,6 +78,7 @@ class MindBreathAIService:
                 self.model = pickle.load(f)
             print(f"[OK] Modelo cargado exitosamente desde: {self.model_path}")
         except Exception as e:
+            print(f"[ERROR] Error cargando el modelo: {e}")
             raise Exception(f"Error cargando el modelo: {e}")
     
     def predict(self, breathing_rate, heart_rate, movement):
