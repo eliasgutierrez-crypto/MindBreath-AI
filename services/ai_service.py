@@ -75,7 +75,7 @@ class MindBreathAIService:
         try:
             with open(self.model_path, 'rb') as f:
                 self.model = pickle.load(f)
-            print(f"✅ Modelo cargado exitosamente desde: {self.model_path}")
+            print(f"[OK] Modelo cargado exitosamente desde: {self.model_path}")
         except Exception as e:
             raise Exception(f"Error cargando el modelo: {e}")
     
