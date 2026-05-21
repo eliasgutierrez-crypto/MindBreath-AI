@@ -570,9 +570,13 @@ def update_dashboard():
         st.dataframe(df_display, use_container_width=True)
     
     # Recomendaciones de IA
+    st.subheader("💡 Recomendaciones de IA")
+    
+    # Debug: mostrar qué datos tiene latest
+    with st.expander("🔍 Debug - Datos recibidos"):
+        st.json(latest)
+    
     if 'recommendations' in latest and latest['recommendations']:
-        st.subheader("💡 Recomendaciones de IA")
-        
         rec = latest['recommendations']
         
         col1, col2 = st.columns([2, 1])
@@ -603,6 +607,8 @@ def update_dashboard():
                 # Barra de confianza
                 st.progress(confidence / 100)
                 st.caption(f"Confianza del modelo en la predicción")
+    else:
+        st.warning("No hay recomendaciones disponibles. Verifica que el servicio de IA esté funcionando.")
     
     # Información del modelo
     if model_info:
