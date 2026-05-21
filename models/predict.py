@@ -1,5 +1,6 @@
 import pickle
 import numpy as np
+import pandas as pd
 from pathlib import Path
 
 MODEL_PATH = 'models/model.pkl'
@@ -30,7 +31,10 @@ def predict_state(model, breathing_rate, heart_rate, movement):
         tuple: (estado_predicho, confianza)
     """
     # Preparar datos para predicción
-    X = np.array([[breathing_rate, heart_rate, movement]])
+    X = pd.DataFrame(
+        [[breathing_rate, heart_rate, movement]],
+        columns=['breathing_rate', 'heart_rate', 'movement']
+    )
     
     # Predicción
     prediction = model.predict(X)[0]

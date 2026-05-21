@@ -2,6 +2,7 @@
 
 import pickle
 import numpy as np
+import pandas as pd
 from pathlib import Path
 
 MODEL_PATH = 'models/model.pkl'
@@ -113,7 +114,10 @@ class MindBreathAIService:
             raise ValueError("Movement debe estar entre 0 y 100")
         
         # Preparar datos para predicción
-        X = np.array([[br, hr, mv]])
+        X = pd.DataFrame(
+            [[br, hr, mv]],
+            columns=['breathing_rate', 'heart_rate', 'movement']
+        )
         
         # Predicción
         try:

@@ -26,7 +26,7 @@ class BiometricSimulator:
                 "breathing_rate": (6, 10),
                 "heart_rate": (50, 65),
                 "movement": (0, 10),
-                "stress_level": "very low"
+                "stress_level": "low"
             }
         }
 
