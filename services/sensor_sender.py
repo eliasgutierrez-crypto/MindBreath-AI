@@ -7,9 +7,8 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from services.simulator import BiometricSimulator
 
-# URL de la API - Cambiar por tu URL de Render
-API_URL = "http://localhost:5000/api/biometric-data"  # Local
-# API_URL = "https://tu-app-mindbreath.onrender.com/api/biometric-data"  # Render (comentado)
+# URL de la API desde variable de entorno o localhost por defecto
+API_URL = os.environ.get('API_URL', 'http://localhost:5000/api/biometric-data')
 
 # Timeout para las peticiones
 REQUEST_TIMEOUT = 5

@@ -357,6 +357,15 @@ def get_state_emoji(state):
     }
     return emojis.get(state, '🧠')
 
+def get_state_label(state):
+    """Retorna etiqueta legible del estado mental"""
+    labels = {
+        'relaxed': 'Relajado',
+        'stressed': 'Estresado',
+        'meditation': 'Meditación'
+    }
+    return labels.get(state, state)
+
 def render_progress_bar(value, max_value=100, color="#667eea"):
     """Renderiza barra de progreso personalizada"""
     percentage = min(100, (value / max_value) * 100)
@@ -559,6 +568,41 @@ def update_dashboard():
         df_display.columns = ['Timestamp', 'Estado', 'Respiración (bpm)', 'Pulso (bpm)', 'Movimiento (%)', 'Nivel Estrés']
         
         st.dataframe(df_display, use_container_width=True)
+    
+    # Recomendaciones de IA
+    if 'recommendations' in latest and latest['recommendations']:
+        st.subheader("💡 Recomendaciones de IA")
+        
+        rec = latest['recommendations']
+        
+        col1, col2 = st.columns([2, 1])
+        
+        with col1:
+            st.markdown(f"""
+            <div class="recommendation-box">
+                <div class="recommendation-title">{get_state_emoji(latest['state'])} {rec.get('status', 'Estado Actual')}</div>
+                <div class="recommendation-text">{rec.get('description', '')}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            if rec.get('advice'):
+                st.markdown("**Consejos:**")
+                for advice in rec['advice']:
+                    st.markdown(f"- {advice}")
+            
+            if rec.get('tips'):
+                st.markdown(f"*{rec['tips']}*", unsafe_allow_html=True)
+        
+        with col2:
+            # Mostrar confianza de la predicción si está disponible
+            if 'prediction' in latest:
+                pred = latest['prediction']
+                confidence = pred.get('confidence_percentage', 0)
+                st.metric("Confianza IA", f"{confidence:.1f}%")
+                
+                # Barra de confianza
+                st.progress(confidence / 100)
+                st.caption(f"Confianza del modelo en la predicción")
     
     # Información del modelo
     if model_info:

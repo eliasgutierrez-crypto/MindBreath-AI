@@ -1,10 +1,45 @@
 import os
+import threading
+import time
 from flask import Flask, jsonify, render_template
 from config import get_config
 from models.database import init_db, db
 
 # Importar modelos
 from models.biometric_data import BiometricData
+
+
+def run_sensor_simulator():
+    """Ejecuta el simulador de sensores en segundo plano"""
+    from services.simulator import BiometricSimulator
+    import requests
+    
+    simulator = BiometricSimulator()
+    
+    # Obtener URL de la API (localhost en desarrollo, URL propia en producción)
+    api_url = os.environ.get('API_URL', 'http://localhost:5000/api/biometric-data')
+    
+    while True:
+        try:
+            # Generar datos
+            data = simulator.generate_data()
+            
+            # Enviar a la API
+            response = requests.post(
+                api_url,
+                json=data,
+                timeout=5,
+                headers={'Content-Type': 'application/json'}
+            )
+            
+            if response.status_code == 201:
+                print(f"[Simulator] Data sent: {data['state']} - BR:{data['breathing_rate']} HR:{data['heart_rate']}")
+            
+        except Exception as e:
+            print(f"[Simulator] Error: {e}")
+        
+        # Esperar 5 segundos antes del siguiente envío
+        time.sleep(5)
 
 
 def create_app(config_name=None):
@@ -39,6 +74,11 @@ def create_app(config_name=None):
         return jsonify({
             'status': 'healthy'
         })
+
+    # Iniciar simulador de sensores en segundo plano
+    if os.environ.get('FLASK_ENV') != 'testing':
+        simulator_thread = threading.Thread(target=run_sensor_simulator, daemon=True)
+        simulator_thread.start()
 
     return app
 
