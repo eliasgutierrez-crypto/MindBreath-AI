@@ -26,42 +26,39 @@ class MindBreathAIService:
         # Recomendaciones por estado
         self.recommendations = {
             'relaxed': {
-                'status': '😌 Relajado',
+                'status': 'Relajado',
                 'description': 'Tu estado mental es relajado y tranquilo',
                 'advice': [
-                    '✨ Mantén esta tranquilidad realizando actividades que disfrutes',
-                    '🏃 Puedes realizar ejercicio ligero o caminar',
-                    '📚 Es buen momento para leer o meditar',
-                    '☕ Tómate un descanso y disfruta de una bebida relajante'
+                    'Mantén esta tranquilidad realizando actividades que disfrutes',
+                    'Puedes realizar ejercicio ligero o caminar',
+                    'Es buen momento para leer o meditar',
+                    'Tómate un descanso y disfruta de una bebida relajante'
                 ],
-                'tips': 'Este es un estado ideal. Continúa con tu rutina normal y disfruta del bienestar.',
-                'emoji': '😌'
+                'tips': 'Este es un estado ideal. Continúa con tu rutina normal y disfruta del bienestar.'
             },
             'stressed': {
-                'status': '😰 Estresado',
+                'status': 'Estresado',
                 'description': 'Detectamos que tu estado mental muestra signos de estrés',
                 'advice': [
-                    '🧘 Realiza ejercicios de respiración profunda (4-7-8)',
-                    '🚶 Haz una caminata al aire libre para despejar la mente',
-                    '🎵 Escucha música relajante o sonidos de la naturaleza',
-                    '💬 Comparte tus preocupaciones con alguien de confianza',
-                    '⏸️ Toma un descanso de tus actividades actuales'
+                    'Realiza ejercicios de respiración profunda (4-7-8)',
+                    'Haz una caminata al aire libre para despejar la mente',
+                    'Escucha música relajante o sonidos de la naturaleza',
+                    'Comparte tus preocupaciones con alguien de confianza',
+                    'Toma un descanso de tus actividades actuales'
                 ],
-                'tips': 'El estrés es temporal. Practica técnicas de relajación y cuida tu bienestar.',
-                'emoji': '😰'
+                'tips': 'El estrés es temporal. Practica técnicas de relajación y cuida tu bienestar.'
             },
             'meditation': {
-                'status': '🧘 Meditación',
+                'status': 'Meditación',
                 'description': 'Te encuentras en un estado profundo de meditación',
                 'advice': [
-                    '🕉️ Continúa con tu sesión de meditación',
-                    '📿 Practica mindfulness y enfócate en tu respiración',
-                    '🌿 Siente la conexión con tu cuerpo y mente',
-                    '✍️ Después de meditar, dedica tiempo a reflexionar',
-                    '💆 Aprovecha este estado para recuperar energía'
+                    'Continúa con tu sesión de meditación',
+                    'Practica mindfulness y enfócate en tu respiración',
+                    'Siente la conexión con tu cuerpo y mente',
+                    'Después de meditar, dedica tiempo a reflexionar',
+                    'Aprovecha este estado para recuperar energía'
                 ],
-                'tips': 'Excelente estado de meditación. Mantente en esta paz interior y disfruta del momento.',
-                'emoji': '🧘'
+                'tips': 'Excelente estado de meditación. Mantente en esta paz interior y disfruta del momento.'
             }
         }
     
@@ -154,11 +151,10 @@ class MindBreathAIService:
         """
         if state not in self.recommendations:
             return {
-                'status': '❓ Estado desconocido',
+                'status': 'Estado desconocido',
                 'description': 'No se pudo identificar el estado',
                 'advice': ['Intenta nuevamente con datos válidos'],
-                'tips': 'Verifica que los datos biométricos sean correctos',
-                'emoji': '❓'
+                'tips': 'Verifica que los datos biométricos sean correctos'
             }
         
         return self.recommendations[state]
